@@ -1,0 +1,9 @@
+.DS_Store
+
+*.log
+log/
+
+node_modules/
+public/assets/libs/
+
+.idea/

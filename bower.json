@@ -1,0 +1,17 @@
+{
+  "name": "keenDoc",
+  "version": "0.0.1",
+  "author": "aksalj",
+  "description": "MEAN app",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.3"
+  }
+}
