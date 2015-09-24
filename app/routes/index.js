@@ -17,5 +17,5 @@
  * @type {[{path: String, router: express.Router}]}
  */
 exports = module.exports = [
-    require('./sample')
+    require('./main')
 ];

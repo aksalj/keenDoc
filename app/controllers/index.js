@@ -12,4 +12,14 @@
  */
 'use strict';
 
-exports.SampleController = require("./sample");
+exports.MainController = {
+    index: function(req, res) {
+
+        var data = {
+            title: "API Documentation",
+            language_tabs: []
+        };
+
+        res.render("index",{title: "keenDoc"});
+    }
+};
