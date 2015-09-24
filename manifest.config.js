@@ -11,7 +11,7 @@
  *
  */
 'use strict';
-var assets = { root : "./public/assets/" };
+var assets = { root : "./static/" };
 
 var prodLikeEnvs = ["production"];
 
@@ -29,6 +29,7 @@ module.exports = {
             scripts: [
                 // Vendor
                 assets.root + "libs/jquery/dist/jquery.min.js",
+
                 assets.root + "js/lib/_energize.js",
                 assets.root + "js/lib/_lunr.js",
                 assets.root + "js/lib/_jquery.highlight.js",
@@ -36,12 +37,16 @@ module.exports = {
                 assets.root + "js/lib/_jquery.tocify.js",
                 assets.root + "js/lib/_imagesloaded.min.js",
 
+                //assets.root + "libs/highlight.js/src/highlight.js",
+
 
                 // Application
                 assets.root + 'js/app/*.js'
             ],
 
             styles: [
+                //assets.root + "libs/highlight.js/src/styles/default.css",
+
                 assets.root + "/css/screen.css"
 
             ]

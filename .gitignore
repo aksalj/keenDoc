@@ -4,12 +4,11 @@
 log/
 
 node_modules/
-public/assets/libs/
+public/
+static/libs/
 
 .idea/
 
 *.css
 *.css.map
 manifest.json
-app-*.js
-app-*.css

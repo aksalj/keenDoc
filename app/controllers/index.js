@@ -11,11 +11,23 @@
  *
  */
 'use strict';
+var fs = require("fs");
+var showdown = require("showdown");
+var converter = new showdown.Converter({
+    parseImgDimensions: true,
+    strikethrough: true,
+    tables: true,
+    tasklists: true
+});
+
+var APP_BUNDLE = __dirname + "/../../manifest.json"; // HUH!!
+var APP_CONTENT = __dirname + "/../../source/index.md";
 
 exports.MainController = {
     index: function(req, res) {
 
-        var manifest = require("../../manifest.json"); // HUH!!
+        var manifest = require(APP_BUNDLE);
+        var content = converter.makeHtml(fs.readFileSync(APP_CONTENT, 'utf8'));
 
         var data = {
             title: "keenDoc API Documentation",
@@ -27,7 +39,8 @@ exports.MainController = {
                     text: "powered by keenDoc",
                     uri: "http://github.com/aksalj/keenDoc"
                 }
-            ]
+            ],
+            content: content
         };
 
         res.render("index", data);

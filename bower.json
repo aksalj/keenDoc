@@ -12,6 +12,7 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "highlight.js": "https://github.com/isagalaev/highlight.js.git#~8.8.0"
   }
 }

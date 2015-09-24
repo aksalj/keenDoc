@@ -1,21 +1,3 @@
----
-title: API Reference
-
-language_tabs:
-  - shell
-  - ruby
-  - python
-
-toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
-
-includes:
-  - errors
-
-search: true
----
-
 # Introduction
 
 Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
@@ -42,8 +24,8 @@ api = kittn.authorize('meowmeowmeow')
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+curl "api_endpoint_here" 
+    -H "Authorization: meowmeowmeow"
 ```
 
 > Make sure to replace `meowmeowmeow` with your API key.
@@ -57,6 +39,27 @@ Kittn expects for the API key to be included in all API requests to the server i
 <aside class="notice">
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
+
+# Errors
+
+<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
+
+The Kittn API uses the following error codes:
+
+
+|Error Code | Meaning|
+|---------- | -------|
+|400        | Bad Request -- Your request sucks|
+|401        | Unauthorized -- Your API key is wrong|
+|403        | Forbidden -- The kitten requested is hidden for administrators only|
+|404        | Not Found -- The specified kitten could not be found|
+|405        | Method Not Allowed -- You tried to access a kitten with an invalid method|
+|406        | Not Acceptable -- You requested a format that isn't json|
+|410        | Gone -- The kitten requested has been removed from our servers|
+|418        | I'm a teapot|
+|429        | Too Many Requests -- You're requesting too many kittens! Slow down!|
+|500        | Internal Server Error -- We had a problem with our server. Try again later.|
+|503        | Service Unavailable -- We're temporarially offline for maintanance. Please try again later.|
 
 # Kittens
 
@@ -110,10 +113,10 @@ This endpoint retrieves all kittens.
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+|Parameter | Default | Description|
+|--------- | ------- | -----------|
+|include_cats | false | If set to true, the result will also include cats.|
+|available | true | If set to false, the result will include kittens that have already been adopted.|
 
 <aside class="success">
 Remember — a happy kitten is an authenticated kitten!
@@ -162,7 +165,7 @@ This endpoint retrieves a specific kitten.
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+|Parameter | Description|
+|--------- | -----------|
+|ID | The ID of the kitten to retrieve|
 

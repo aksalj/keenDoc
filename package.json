@@ -19,9 +19,11 @@
         "ejs": "^2.3.3",
         "express": "^4.13.3",
         "mongoose": "^4.1.1",
-        "morgan": "^1.6.1"
+        "morgan": "^1.6.1",
+        "showdown": "^1.2.3"
     },
     "devDependencies": {
+        "del": "^1.2.1",
         "gulp": "^3.9.0",
         "gulp-bundle-assets": "^2.22.0",
         "gulp-flatten": "^0.1.1"

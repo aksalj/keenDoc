@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title><%= title || "API Documentation" %></title>
 
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/androidstudio.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+
     <%- styles %>
     <%- scripts %>
 
@@ -14,6 +18,7 @@
         $(function() {
             var langs = '<%= language_tabs %>'.split(',');
             setupLanguages(langs);
+            hljs.initHighlightingOnLoad();
         });
     </script>
     <% } %>
@@ -23,11 +28,11 @@
 <a href="#" id="nav-button">
       <span>
         NAV
-          <img src="assets/img/navbar.png" />
+          <img src="img/navbar.png" />
       </span>
 </a>
 <div class="tocify-wrapper">
-    <img src="assets/img/logo.png" />
+    <img src="img/logo.png" />
 
     <div class="lang-selector">
         <% language_tabs.forEach(function(lang) { %>
@@ -40,8 +45,7 @@
     </div>
     <ul class="search-results"></ul>
 
-    <div id="toc">
-    </div>
+    <div id="toc"></div>
 
     <ul class="toc-footer">
         <% toc_footers.forEach(function(toc){ %>
@@ -53,9 +57,7 @@
 <div class="page-wrapper">
     <div class="dark-box"></div>
 
-    <div class="content">
-
-    </div>
+    <div class="content"><%- content %></div>
 
     <div class="dark-box">
         <div class="lang-selector">
