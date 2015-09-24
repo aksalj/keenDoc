@@ -10,3 +10,6 @@ public/assets/libs/
 
 *.css
 *.css.map
+manifest.json
+app-*.js
+app-*.css

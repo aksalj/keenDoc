@@ -15,8 +15,12 @@
 exports.MainController = {
     index: function(req, res) {
 
+        var manifest = require("../../manifest.json"); // HUH!!
+
         var data = {
             title: "keenDoc API Documentation",
+            scripts: manifest.app.scripts,
+            styles: manifest.app.styles,
             language_tabs: ['shell', 'ruby', 'python'], // [String]
             search: true,
             toc_footers: [ //[{text:String, uri: String}]
