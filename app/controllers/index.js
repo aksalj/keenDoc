@@ -22,7 +22,6 @@ exports.MainController = {
             scripts: manifest.app.scripts,
             styles: manifest.app.styles,
             language_tabs: ['shell', 'ruby', 'python'], // [String]
-            search: true,
             toc_footers: [ //[{text:String, uri: String}]
                 {
                     text: "powered by keenDoc",
