@@ -36,13 +36,13 @@ else {
 app.set('view engine', 'ejs');
 app.set('views', 'app/views');
 
+// Static files
+app.use(express.static('public'));
+
     // Setup Routes
 routes.forEach(function(route) {
     app.use(route.path, route.router);
 });
-
-    // Static files
-app.use(express.static('public'));
 
 
 exports = module.exports = app;

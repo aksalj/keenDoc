@@ -16,10 +16,17 @@ exports.MainController = {
     index: function(req, res) {
 
         var data = {
-            title: "API Documentation",
-            language_tabs: []
+            title: "keenDoc API Documentation",
+            language_tabs: ['shell', 'ruby', 'python'], // [String]
+            search: true,
+            toc_footers: [ //[{text:String, uri: String}]
+                {
+                    text: "powered by keenDoc",
+                    uri: "http://github.com/aksalj/keenDoc"
+                }
+            ]
         };
 
-        res.render("index",{title: "keenDoc"});
+        res.render("index", data);
     }
 };

@@ -1,0 +1,35 @@
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6,
+html,
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+    font-weight: bold
+}
+
+.content code,
+.content pre {
+    font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, serif;
+    font-size: 12px;
+    line-height: 1.5
+}
+
+.content code {
+    -ms-word-break: break-all;
+    word-break: break-all;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto
+}

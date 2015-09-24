@@ -7,3 +7,6 @@ node_modules/
 public/assets/libs/
 
 .idea/
+
+*.css
+*.css.map
