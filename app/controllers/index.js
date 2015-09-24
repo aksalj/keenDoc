@@ -11,38 +11,5 @@
  *
  */
 'use strict';
-var fs = require("fs");
-var showdown = require("showdown");
-var converter = new showdown.Converter({
-    parseImgDimensions: true,
-    strikethrough: true,
-    tables: true,
-    tasklists: true
-});
 
-var APP_BUNDLE = __dirname + "/../../manifest.json"; // HUH!!
-var APP_CONTENT = __dirname + "/../../source/index.md";
-
-exports.MainController = {
-    index: function(req, res) {
-
-        var manifest = require(APP_BUNDLE);
-        var content = converter.makeHtml(fs.readFileSync(APP_CONTENT, 'utf8'));
-
-        var data = {
-            title: "keenDoc API Documentation",
-            scripts: manifest.app.scripts,
-            styles: manifest.app.styles,
-            language_tabs: ['shell', 'ruby', 'python'], // [String]
-            toc_footers: [ //[{text:String, uri: String}]
-                {
-                    text: "powered by keenDoc",
-                    uri: "http://github.com/aksalj/keenDoc"
-                }
-            ],
-            content: content
-        };
-
-        res.render("index", data);
-    }
-};
+exports.MainController = require("./main");

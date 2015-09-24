@@ -1,13 +1,13 @@
 {
-  "debug": true,
-  "app": {
-    "host": "localhost",
-    "port": 3000,
-    "secure": false,
-    "credentials": {
-      "pfx": null,
-      "key": null,
-      "cert": null
+    "debug": true,
+    "app": {
+        "host": "localhost",
+        "port": 3000,
+        "secure": false,
+        "credentials": {
+            "pfx": null,
+            "key": null,
+            "cert": null
+        }
     }
-  }
 }
