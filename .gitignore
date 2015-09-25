@@ -6,7 +6,8 @@ log/
 node_modules/
 public/
 static/libs/
-
+source/*
+!source/sample.md
 .idea/
 config/development.json
 
