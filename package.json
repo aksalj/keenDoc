@@ -5,6 +5,7 @@
   "main": "app/index.js",
   "scripts": {
     "start": "node server.js",
+    "prestart": "gulp build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -29,6 +30,7 @@
     "del": "^1.2.1",
     "gulp": "^3.9.0",
     "gulp-bundle-assets": "^2.22.0",
-    "gulp-flatten": "^0.1.1"
+    "gulp-flatten": "^0.1.1",
+    "gulp-sass": "^2.0.4"
   }
 }

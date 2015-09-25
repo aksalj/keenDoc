@@ -8,13 +8,14 @@ See live [demo](http://tripit.github.io/slate/).
 ```shell
 $ git clone https://github.com/YOURUSERNAME/keenDocs.git docs
 $ cd docs
+$ [sudo] npm install -g gulp
 $ npm install && bower install
 ```
 
 Modify `config/default.json` to your liking then
 
 ```shell
-$ npm start
+$ NODE_ENV=production npm start
 ```
 
 Now you can start writing your `markdown` documentation in `source/*.md`.

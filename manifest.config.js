@@ -22,7 +22,7 @@ module.exports = {
             options: {
                 uglify:prodLikeEnvs,
                 minCss: prodLikeEnvs,
-                rev: true,
+                rev: prodLikeEnvs,
                 sourcemaps: false
             },
 
@@ -47,7 +47,7 @@ module.exports = {
             styles: [
                 //assets.root + "libs/highlight.js/src/styles/default.css",
 
-                assets.root + "/css/screen.css"
+                assets.root + "/css/style.css"
 
             ]
         }

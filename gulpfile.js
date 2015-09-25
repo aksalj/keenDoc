@@ -15,6 +15,7 @@ var gulp = require('gulp');
 var del = require('del');
 var flatten = require('gulp-flatten');
 var bundle = require('gulp-bundle-assets');
+var sass = require('gulp-sass');
 
 var CONFIG = "./manifest.config.js";
 var SOURCE = "./static/";
@@ -25,6 +26,14 @@ gulp.task('clean', function(cb) {
     del(DESTINATION, cb);
 });
 
+gulp.task('sass', function () {
+    var src = SOURCE + "scss/**/*.scss";
+    var dst = SOURCE + "css/";
+    return gulp
+        .src(src)
+        .pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
+        .pipe(gulp.dest(dst));
+});
 
 gulp.task('copyFonts', ["clean"], function() {
     var src = SOURCE + "**/*.{eot,ttf,woff,woff2,svg}";
@@ -48,7 +57,7 @@ gulp.task('copyRobots', ["clean"], function() {
 });
 
 
-gulp.task('build', ["clean", "copyFonts", "copyImages", "copyRobots"], function () {
+gulp.task('build', ["clean", "sass", "copyFonts", "copyImages", "copyRobots"], function () {
     return gulp.src(CONFIG)
         .pipe(bundle({
             quietMode: true
