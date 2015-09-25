@@ -1,7 +1,7 @@
 # keenDoc
 Beautiful static documentation for your API inspired by [Stripe](https://stripe.com/docs/api) and [Slate](https://github.com/tripit/slate).
 
-See live [demo](http://tripit.github.io/slate/).
+See live [demo](http://aksalj.github.io/keenDoc).
 
 ### Usage
 
