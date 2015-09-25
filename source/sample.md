@@ -4,7 +4,7 @@ Welcome to the Kittn API! You can use our API to access Kittn API endpoints, whi
 
 We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+This example API documentation page was created with [keenDoc](http://github.com/aksalj/keenDoc). Feel free to edit it and use it as a base for your own API's documentation.
 
 # Authentication
 
@@ -41,8 +41,6 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
 
 # Errors
-
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
 
 The Kittn API uses the following error codes:
 
