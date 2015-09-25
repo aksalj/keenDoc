@@ -11,10 +11,12 @@
  *
  */
 'use strict';
+var conf = require("config");
 var fs = require("fs");
 var path = require("path");
 var showdown = require("showdown");
-var conf = require("config");
+var cheerio = require('cheerio');
+var hoek = require('hoek');
 
 var converter = new showdown.Converter({
     parseImgDimensions: true,
@@ -24,7 +26,7 @@ var converter = new showdown.Converter({
 });
 
 var APP_MANIFEST = path.join(process.cwd(), conf.get("app.manifest"));
-var APP_CONTENT = path.join(process.cwd(), conf.get("content.file"));
+var APP_CONTENT = path.join(process.cwd(), conf.get("content"));
 
 exports = module.exports = {
 
@@ -33,13 +35,29 @@ exports = module.exports = {
         // Read manifest and content on every request to allow them to be edited w/o restarting the server...
         var manifest = require(APP_MANIFEST);
         var content = converter.makeHtml(fs.readFileSync(APP_CONTENT, 'utf8'));
-        var languages = conf.get("content.languages"); // FIXME: Should parse languages from markdown or generated html?
+
+        // Get language tabs from generated HTML
+        var language_tabs = (function(){ // FIXME: Must eliminate languages not intended for the tabs e.g. json results
+            var $ = cheerio.load(content);
+            var tabs = [];
+            $("pre code").each(function () {
+                var cls = $(this).attr("class").trim();
+                cls = cls.split(" ");
+                cls.forEach(function (lang) {
+                    if (!lang.match(/language-.+/ig)) {
+                        tabs.push(lang);
+                    }
+                });
+            });
+            return hoek.unique(tabs);
+        })();
+
 
         var data = {
             title: "keenDoc API Documentation",
             scripts: manifest.app.scripts,
             styles: manifest.app.styles,
-            language_tabs: languages,
+            language_tabs: language_tabs,
             toc_footers: [ //[{text:String, uri: String}]
                 {
                     text: "powered by keenDoc",

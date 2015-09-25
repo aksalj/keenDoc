@@ -11,8 +11,5 @@
             "cert": null
         }
     },
-    "content": {
-        "file": "source/index.md",
-        "languages": ["shell", "ruby", "python"]
-    }
+    "content": "source/index.md"
 }
