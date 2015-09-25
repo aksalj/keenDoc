@@ -1,5 +1,7 @@
 # keenDoc
-API documentation inspired by [Stripe](https://stripe.com/docs/api). The UI was originally based on [Slate](https://github.com/tripit/slate).
+Beautiful static documentation for your API inspired by [Stripe](https://stripe.com/docs/api) and [Slate](https://github.com/tripit/slate).
+
+See live [demo](http://tripit.github.io/slate/).
 
 ### Usage
 
