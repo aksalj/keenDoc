@@ -28,7 +28,7 @@ gulp.task('clean', function(cb) {
 
 gulp.task('copyFonts', ["clean"], function() {
     var src = SOURCE + "**/*.{eot,ttf,woff,woff2,svg}";
-    var dst = DESTINATION; // + "fonts";
+    var dst = DESTINATION + "fonts";
     return gulp.src(src).pipe(flatten()).pipe(gulp.dest(dst));
 });
 
