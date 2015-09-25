@@ -18,6 +18,7 @@ var router = express.Router();
 var ctrl = controllers.MainController;
 
 router.get("/", ctrl.index);
+router.get("/sample", ctrl.sample);
 
 exports = module.exports = {
     path: "/",

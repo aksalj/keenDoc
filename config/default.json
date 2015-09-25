@@ -11,5 +11,8 @@
             "cert": null
         }
     },
-    "content": "source/sample.md"
+    "content": {
+        "title": "API Documentation",
+        "file": "source/index.md"
+    }
 }

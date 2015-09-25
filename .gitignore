@@ -2,13 +2,18 @@
 
 *.log
 log/
+.idea/
 
 node_modules/
 public/
 static/libs/
+
 source/*
+!source/index.md
 !source/sample.md
-.idea/
+
+
+config/production.json
 config/development.json
 
 *.css

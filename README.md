@@ -1,5 +1,5 @@
 # keenDoc
-API documentation inspired by [Stripe](https://stripe.com/docs/api). The interface was originally based on [Slate](https://github.com/tripit/slate).
+API documentation inspired by [Stripe](https://stripe.com/docs/api). The UI was originally based on [Slate](https://github.com/tripit/slate).
 
 ### Usage
 
@@ -7,10 +7,15 @@ API documentation inspired by [Stripe](https://stripe.com/docs/api). The interfa
 $ git clone https://github.com/YOURUSERNAME/keenDocs.git docs
 $ cd docs
 $ npm install && bower install
+```
+
+Modify `config/default.json` to your liking then
+
+```shell
 $ npm start
 ```
 
-Now you can start writing your `markdown` documentation in `source/index.md`.
+Now you can start writing your `markdown` documentation in `source/*.md`.
 
 ### Contributing
 
