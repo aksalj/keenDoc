@@ -1,13 +1,18 @@
 {
-    "debug": true,
+    "debug": false,
     "app": {
         "host": "localhost",
         "port": 3000,
+        "manifest": "manifest.json",
         "secure": false,
         "credentials": {
             "pfx": null,
             "key": null,
             "cert": null
         }
+    },
+    "content": {
+        "file": "source/index.md",
+        "languages": ["shell", "ruby", "python"]
     }
 }

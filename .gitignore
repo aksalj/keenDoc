@@ -8,6 +8,7 @@ public/
 static/libs/
 
 .idea/
+config/development.json
 
 *.css
 *.css.map

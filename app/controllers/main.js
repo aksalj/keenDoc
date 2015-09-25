@@ -12,7 +12,10 @@
  */
 'use strict';
 var fs = require("fs");
+var path = require("path");
 var showdown = require("showdown");
+var conf = require("config");
+
 var converter = new showdown.Converter({
     parseImgDimensions: true,
     strikethrough: true,
@@ -20,22 +23,23 @@ var converter = new showdown.Converter({
     tasklists: true
 });
 
-var APP_BUNDLE = __dirname + "/../../manifest.json"; // HUH!!
-var APP_CONTENT = __dirname + "/../../source/index.md";
-
-// TODO: Read multiple md files?
+var APP_MANIFEST = path.join(process.cwd(), conf.get("app.manifest"));
+var APP_CONTENT = path.join(process.cwd(), conf.get("content.file"));
 
 exports = module.exports = {
 
     index: function (req, res) {
-        var manifest = require(APP_BUNDLE);
+
+        // Read manifest and content on every request to allow them to be edited w/o restarting the server...
+        var manifest = require(APP_MANIFEST);
         var content = converter.makeHtml(fs.readFileSync(APP_CONTENT, 'utf8'));
+        var languages = conf.get("content.languages"); // FIXME: Should parse languages from markdown or generated html?
 
         var data = {
             title: "keenDoc API Documentation",
             scripts: manifest.app.scripts,
             styles: manifest.app.styles,
-            language_tabs: ['shell', 'ruby', 'python'], // [String] TODO: Parametrize some how
+            language_tabs: languages,
             toc_footers: [ //[{text:String, uri: String}]
                 {
                     text: "powered by keenDoc",
