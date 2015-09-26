@@ -63,13 +63,16 @@ var _makeLanguageTabs = function (content) {
     var $ = cheerio.load(content);
     var tabs = [];
     $("pre code").each(function () {
-        var cls = $(this).attr("class").trim();
-        cls = cls.split(" ");
-        cls.forEach(function (lang) {
-            if (!lang.match(/language-.+/ig)) {
-                tabs.push(lang);
-            }
-        });
+        var cls = $(this).attr("class");
+        if (cls) {
+            cls = cls.trim();
+            cls = cls.split(" ");
+            cls.forEach(function (lang) {
+                if (!lang.match(/language-.+/ig)) {
+                    tabs.push(lang);
+                }
+            });
+        }
     });
 
     tabs = _.unique(tabs);
