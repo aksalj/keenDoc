@@ -16,7 +16,7 @@ var fs = require("fs");
 var path = require("path");
 var showdown = require("showdown");
 var cheerio = require('cheerio');
-var hoek = require('hoek');
+var _ = require('lodash');
 
 var APP_MANIFEST = path.join(process.cwd(), conf.get("app.manifest"));
 var APP_CONTENT = path.join(process.cwd(), conf.get("content.file"));
@@ -60,7 +60,6 @@ var _makeLayoutData = function (title, manifest, language_tabs, content) {
  * @private
  */
 var _makeLanguageTabs = function (content) {
-    // FIXME: Must eliminate languages not intended for the tabs e.g. json results
     var $ = cheerio.load(content);
     var tabs = [];
     $("pre code").each(function () {
@@ -72,7 +71,13 @@ var _makeLanguageTabs = function (content) {
             }
         });
     });
-    return hoek.unique(tabs);
+
+    tabs = _.unique(tabs);
+
+    // HUH: Eliminate languages not intended for the tabs e.g. json results. Is there a better way??
+    tabs = _.difference(tabs, conf.get('content.exclude_tabs'));
+
+    return tabs;
 };
 
 exports = module.exports = {
