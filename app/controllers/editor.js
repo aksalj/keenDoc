@@ -12,35 +12,31 @@
  */
 'use strict';
 var conf = require('config');
-var SHA256 = require("crypto-js/sha256");
 var _ = require('lodash');
+
+var UserModel = function () {
+    var _self = this;
+    var _users = conf.get('editor.users');
+
+    this.findByUsername = function (username) {
+        return _.find(_users, function(usr) {
+            return usr.username === username;
+        });
+    };
+
+    this.validatePassword = function (username, password) {
+        var usr = _self.findByUsername(username);
+        if(usr) {
+            return usr.password === password;
+        } else {
+            return false;
+        }
+    }
+};
 
 exports = module.exports = {
 
-    Users: function () {
-        var _self = this;
-        var _users = conf.get('editor.users');
-
-        _users.forEach(function(usr) {
-            usr.password = SHA256(usr.password);
-        });
-
-        this.findByUsername = function (username) {
-            return _.find(_users, function(usr) {
-                return usr.username === username;
-            });
-        };
-
-        this.validatePassword = function (username, password) {
-            var usr = _self.findByUsername(username);
-            if(usr) {
-                return usr.password === SHA256(password);
-            } else {
-                return false;
-            }
-        }
-
-    },
+    Users: new UserModel(),
 
 
     index: function (req, res) {
@@ -48,6 +44,8 @@ exports = module.exports = {
         var data = {
             user: req.user
         };
+
+        console.error(data);
 
         res.render("editor", data);
     },

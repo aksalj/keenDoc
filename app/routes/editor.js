@@ -17,30 +17,27 @@ var passport = require("passport");
 var LocalStrategy = require('passport-local').Strategy;
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var expressSession = require('express-session');
+var cookieSession = require('cookie-session');
+var flash = require('flash');
 
 var BASE_URL = "/editor";
+var LOGIN_URI = "/editor/login";
 
 var router = express.Router();
 var ctrl = require("../controllers").EditorController;
 
-var ensureAuthenticated = function (req, res) {
+var ensureAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) { return next(); }
     else {
-        // HUH: Redirect or just send error?
-        res.redirect(BASE_URL + "/login");
+        res.redirect(LOGIN_URI);
     }
 };
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(cookieParser());
-router.use(expressSession({
-    cookie: { path: BASE_URL, httpOnly: true, secure: false, maxAge: null },
-    secret: '2hT4juO1MzuSu8akOZfy',
-    resave: false,
-    saveUninitialized: false
-}));
+router.use(cookieSession({secret: '2hT4juO1MzuSu8akOZfy' }));
+router.use(flash());
 
 // Authentication
 router.use(passport.initialize());
@@ -56,12 +53,14 @@ passport.use(new LocalStrategy(function(username, password, done) {
         }
     }
 
-    done("Invalid username and/or password", null);
+    return done(null, false, {message: "Invalid username and/or password"});
 
 }));
+
 passport.serializeUser(function(user, done) {
     done(null, user.username);
 });
+
 passport.deserializeUser(function(username, done) {
     var usr = ctrl.Users.findByUsername(username);
     var err = usr? null : "User not found";
@@ -70,30 +69,27 @@ passport.deserializeUser(function(username, done) {
 
 
 router.get('/login', function(req, res) {
-    res.render('login', { user : req.user });
+
+    if(req.isAuthenticated()) {
+        return res.redirect(BASE_URL);
+    }
+
+    var flash = req.session.flash;
+    var message = (flash && flash.length > 0)? flash[0] : null;
+    res.render('login', { loginUri: LOGIN_URI, flash: message});
 });
 
-router.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), function(req, res, next) {
-    req.session.save(function (err) {
-        if (err) {
-            return next(err);
-        }
-        res.redirect(BASE_URL);
-    });
-});
+router.post('/login',
+    passport.authenticate('local', { failureRedirect: LOGIN_URI, successRedirect: BASE_URL, failureFlash: true })
+);
 
 router.get('/logout', ensureAuthenticated, function(req, res, next) {
     req.logout();
-    req.session.save(function (err) {
-        if (err) {
-            return next(err);
-        }
-        res.redirect(BASE_URL);
-    });
+    res.redirect(BASE_URL);
 });
 
-
 router.get("/", ensureAuthenticated, ctrl.index);
+
 router.post("/save", ensureAuthenticated, ctrl.save);
 
 exports = module.exports = {
