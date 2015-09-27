@@ -19,6 +19,7 @@ var routes = [
 
 
 if(conf.get("editor.enabled")) { // Add editor if enabled in configs
+    console.warn("Enabling this editor could pose a security risk.");
     routes.push(require('./editor'));
 }
 

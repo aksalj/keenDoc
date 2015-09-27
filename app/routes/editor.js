@@ -19,20 +19,25 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressSession = require('express-session');
 
-var controllers = require("../controllers");
-
-var USERS = conf.get("editor.users"); // TODO: Encode the plain passwords
 var BASE_URL = "/editor";
 
 var router = express.Router();
-var ctrl = controllers.EditorController;
+var ctrl = require("../controllers").EditorController;
+
+var ensureAuthenticated = function (req, res) {
+    if (req.isAuthenticated()) { return next(); }
+    else {
+        // HUH: Redirect or just send error?
+        res.redirect(BASE_URL + "/login");
+    }
+};
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(cookieParser());
 router.use(expressSession({
     cookie: { path: BASE_URL, httpOnly: true, secure: false, maxAge: null },
-    secret: 'keyboard cat',
+    secret: '2hT4juO1MzuSu8akOZfy',
     resave: false,
     saveUninitialized: false
 }));
@@ -43,13 +48,24 @@ router.use(passport.session());
 
 // passport config
 passport.use(new LocalStrategy(function(username, password, done) {
-    // TODO: look up username in USERS
+
+    var usr = ctrl.Users.findByUsername(username);
+    if(usr) {
+        if (ctrl.Users.validatePassword(username, password)) {
+            return done(null, usr);
+        }
+    }
+
+    done("Invalid username and/or password", null);
+
 }));
 passport.serializeUser(function(user, done) {
     done(null, user.username);
 });
 passport.deserializeUser(function(username, done) {
-    // TODO: look up username in USERS
+    var usr = ctrl.Users.findByUsername(username);
+    var err = usr? null : "User not found";
+    done(err, usr);
 });
 
 
@@ -57,7 +73,7 @@ router.get('/login', function(req, res) {
     res.render('login', { user : req.user });
 });
 
-router.post('/login', passport.authenticate('local'), function(req, res, next) {
+router.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), function(req, res, next) {
     req.session.save(function (err) {
         if (err) {
             return next(err);
@@ -66,7 +82,7 @@ router.post('/login', passport.authenticate('local'), function(req, res, next) {
     });
 });
 
-router.get('/logout', function(req, res, next) {
+router.get('/logout', ensureAuthenticated, function(req, res, next) {
     req.logout();
     req.session.save(function (err) {
         if (err) {
@@ -77,11 +93,8 @@ router.get('/logout', function(req, res, next) {
 });
 
 
-
-
-
-router.get("/", ctrl.index);
-router.post("/save", ctrl.index);
+router.get("/", ensureAuthenticated, ctrl.index);
+router.post("/save", ensureAuthenticated, ctrl.save);
 
 exports = module.exports = {
     path: BASE_URL,
