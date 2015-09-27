@@ -36,7 +36,7 @@ var ensureAuthenticated = function (req, res, next) {
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(cookieParser());
-router.use(cookieSession({secret: '2hT4juO1MzuSu8akOZfy' }));
+router.use(cookieSession({secret: '2hT4juO1MzuSu8akOZfy', path: BASE_URL }));
 router.use(flash());
 
 // Authentication
@@ -85,12 +85,14 @@ router.post('/login',
 
 router.get('/logout', ensureAuthenticated, function(req, res, next) {
     req.logout();
-    res.redirect(BASE_URL);
+    res.redirect("/");
 });
 
 router.get("/", ensureAuthenticated, ctrl.index);
 
 router.post("/save", ensureAuthenticated, ctrl.save);
+
+router.get("/content", ensureAuthenticated, ctrl.sendContent);
 
 exports = module.exports = {
     path: BASE_URL,

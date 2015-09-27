@@ -18,14 +18,14 @@ var debug = require('debug')('app');
 var express = require("express");
 var routes = require("./routes");
 
-var DEBUG = conf.get("debug");
+var Const = require("./const");
 
 var app = express();
 
 // Express setup
 
     // Logging
-if(DEBUG) { app.use(morgan('dev')); }
+if(Const.DEBUG) { app.use(morgan('dev')); }
 else {
     // In production, log access to file
     var logDir = process.cwd() + "/log/";

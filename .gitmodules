@@ -1,3 +1,0 @@
-[submodule "static/editor"]
-	path = static/editor
-	url = git@github.com:aksalj/showdownjs.git

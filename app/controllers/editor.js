@@ -11,8 +11,12 @@
  *
  */
 'use strict';
+var path = require("path");
 var conf = require('config');
+var fs = require("fs");
 var _ = require('lodash');
+
+var Const = require("../const");
 
 var UserModel = function () {
     var _self = this;
@@ -41,17 +45,31 @@ exports = module.exports = {
 
     index: function (req, res) {
 
-        var data = {
-            user: req.user
-        };
+        var manifest = require(Const.APP_MANIFEST);
 
-        console.error(data);
+        var data = {
+            user: req.user,
+            styles: manifest.editor.styles,
+            scripts: manifest.editor.scripts
+        };
 
         res.render("editor", data);
     },
 
     save: function(req, res) {
 
-        res.sendStatus(500);
+        fs.writeFile(Const.APP_CONTENT, req.body.content, function (err) {
+            if (err){
+                console.error(err);
+                res.sendStatus(500);
+            }
+            else {
+                res.end();
+            }
+        });
+    },
+
+    sendContent: function (req, res) {
+        res.sendFile(Const.APP_CONTENT);
     }
 };

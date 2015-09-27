@@ -47,7 +47,32 @@ module.exports = {
             styles: [
                 //assets.root + "libs/highlight.js/src/styles/default.css",
 
-                assets.root + "/css/style.css"
+                assets.root + "css/style.css"
+
+            ]
+        },
+
+        editor: {
+            options: {
+                uglify:prodLikeEnvs,
+                minCss: prodLikeEnvs,
+                rev: prodLikeEnvs,
+                sourcemaps: false
+            },
+
+            scripts: [
+                // Vendor
+                assets.root + "libs/jquery/dist/jquery.min.js",
+                assets.root + "libs/jquery-typewatch/jquery.typewatch.js",
+                assets.root + "libs/showdown/dist/showdown.min.js",
+
+
+                assets.root + "js/editor/*.js"
+
+            ],
+
+            styles: [
+                assets.root + "css/editor.css"
 
             ]
         }

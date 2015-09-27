@@ -13,6 +13,8 @@
   ],
   "dependencies": {
     "jquery": "~2.1.4",
-    "highlight.js": "https://github.com/isagalaev/highlight.js.git#~8.8.0"
+    "highlight.js": "https://github.com/isagalaev/highlight.js.git#~8.8.0",
+    "showdown": "~1.2.3",
+    "jquery-typewatch": "~2.2.2"
   }
 }

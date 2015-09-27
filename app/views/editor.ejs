@@ -3,8 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>keenDoc Editor</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Old+Standard+TT:400,400italic,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <%- styles %>
+    <%- scripts %>
 </head>
 <body>
+
+<nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+        <li class="name">
+            <a href="/editor">
+                <img id="logo" src="img/logo.png">
+            </a>
+        </li>
+    </ul>
+
+    <section class="top-bar-section">
+        <ul class="right">
+            <li><a><i class="fa fa-lg fa-user"></i>&nbsp;&nbsp;<%=user.name%></a></li>
+            <li><a href="/editor/logout">Logout</a></li>
+        </ul>
+    </section>
+</nav>
+
+
+<div id="editor-wrapper" class="container">
+    <textarea id="editor"></textarea>
+    <div id="preview"></div>
+</div>
 
 </body>
 </html>

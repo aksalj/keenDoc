@@ -18,8 +18,7 @@ var showdown = require("showdown");
 var cheerio = require('cheerio');
 var _ = require('lodash');
 
-var APP_MANIFEST = path.join(process.cwd(), conf.get("app.manifest"));
-var APP_CONTENT = path.join(process.cwd(), conf.get("content.file"));
+var Const = require("../const");
 
 var converter = new showdown.Converter({
     parseImgDimensions: true,
@@ -87,8 +86,8 @@ exports = module.exports = {
 
     index: function (req, res) {
         // Read manifest and content on every request to allow them to be edited w/o restarting the server...
-        var manifest = require(APP_MANIFEST);
-        var content = converter.makeHtml(fs.readFileSync(APP_CONTENT, 'utf8'));
+        var manifest = require(Const.APP_MANIFEST);
+        var content = converter.makeHtml(fs.readFileSync(Const.APP_CONTENT, 'utf8'));
 
         var language_tabs = _makeLanguageTabs(content);
         var data = _makeLayoutData(conf.get("content.title"), manifest, language_tabs, content);
@@ -98,7 +97,7 @@ exports = module.exports = {
 
     sample: function (req, res) {
 
-        var manifest = require(APP_MANIFEST);
+        var manifest = require(Const.APP_MANIFEST);
         var content = converter.makeHtml(fs.readFileSync(path.join(process.cwd(), "source/sample.md"), 'utf8'));
 
         var language_tabs = _makeLanguageTabs(content);
