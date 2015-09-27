@@ -15,5 +15,13 @@
         "title": "API Documentation",
         "file": "source/index.md",
         "exclude_tabs": ["json", "xml"]
+    },
+    "editor": {
+        "enabled": false,
+        "users": [{
+            "name": "Administrator",
+            "username": "admin",
+            "password": "admin"
+        }]
     }
 }

@@ -11,11 +11,21 @@
  *
  */
 'use strict';
+var conf = require("config");
+
+var routes = [
+    require("./main")
+];
+
+
+if(conf.get("editor.enabled")) { // Add editor if enabled in configs
+    routes.push(require('./editor'));
+}
+
+
 
 /**
  * Array of all app routers.
  * @type {[{path: String, router: express.Router}]}
  */
-exports = module.exports = [
-    require('./main')
-];
+exports = module.exports = routes;

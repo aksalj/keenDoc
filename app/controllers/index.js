@@ -13,3 +13,4 @@
 'use strict';
 
 exports.MainController = require("./main");
+exports.EditorController = require("./editor");
