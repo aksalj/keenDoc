@@ -45,16 +45,13 @@ router.use(passport.session());
 
 // passport config
 passport.use(new LocalStrategy(function(username, password, done) {
-
     var usr = ctrl.Users.findByUsername(username);
     if(usr) {
         if (ctrl.Users.validatePassword(username, password)) {
             return done(null, usr);
         }
     }
-
     return done(null, false, {message: "Invalid username and/or password"});
-
 }));
 
 passport.serializeUser(function(user, done) {

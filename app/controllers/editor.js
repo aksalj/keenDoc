@@ -42,22 +42,17 @@ exports = module.exports = {
 
     Users: new UserModel(),
 
-
     index: function (req, res) {
-
         var manifest = require(Const.APP_MANIFEST);
-
         var data = {
             user: req.user,
             styles: manifest.editor.styles,
             scripts: manifest.editor.scripts
         };
-
         res.render("editor", data);
     },
 
     save: function(req, res) {
-
         fs.writeFile(Const.APP_CONTENT, req.body.content, function (err) {
             if (err){
                 console.error(err);
@@ -69,7 +64,5 @@ exports = module.exports = {
         });
     },
 
-    sendContent: function (req, res) {
-        res.sendFile(Const.APP_CONTENT);
-    }
+    sendContent: function (req, res) { res.sendFile(Const.APP_CONTENT); }
 };
